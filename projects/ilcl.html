@@ -167,8 +167,6 @@
         <div class="affiliation">RIRO Lab, KAIST</div>
         <div class="links">
           <a href="../data/768_ILCL_Inverse_Logic_Constra.pdf">Paper</a>
-          <a href="https://github.com/MinchoU/ILCL">Code</a>
-          <a href="#bibtex">BibTeX</a>
         </div>
       </div>
 
@@ -182,72 +180,19 @@
       </div>
 
       <div class="section">
-        <div class="section-title">Abstract</div>
-        <div class="abstract">
-          Effectively integrating constraints into reinforcement learning (RL) is crucial for safe and reliable deployment in real-world applications. However, manually designing these constraints is challenging, particularly for complex, temporally-extended behaviors. In this work, we propose Inverse Logic-Constraint Learning (ILCL), a framework that learns interpretable temporal logic constraints from demonstrations and incorporates them into RL to improve task performance while ensuring constraint satisfaction. Our approach consists of two key components: (1) a tree-based genetic algorithm that efficiently searches the space of temporal logic formulas to identify constraints that are consistently observed across demonstrations, and (2) a constraint-regularized RL algorithm with logic cost redistribution that enables training policies with zero constraint violations. Experiments in both simulated and real-world robotic tasks demonstrate that ILCL successfully learns meaningful constraints from demonstrations, leading to improved generalization performance and zero-violation policies in complex domains.
+        <div class="section-title">Project Status</div>
+        <div class="abstract" style="text-align: center; padding: 40px;">
+          <h3 style="color: #4a6fa5;">🚧 Coming soon 🚧</h3>
         </div>
       </div>
 
       <div class="section">
-        <div class="section-title">Method</div>
-        <p>
-          Our method, Inverse Logic-Constraint Learning (ILCL), learns interpretable temporal logic constraints from demonstrations and incorporates them into reinforcement learning. The approach consists of two main components:
-        </p>
-        
-        <img src="/api/placeholder/800/500" alt="ILCL Method Overview" class="method-image">
-        
-        <ol>
-          <li><strong>Inverse Logic-Constraint Learning:</strong> Using a tree-based genetic algorithm to search the space of temporal logic formulas and identify constraints that are consistently satisfied in demonstrations.</li>
-          <li><strong>Constraint-Regularized RL with Logic Cost Redistribution:</strong> A novel constraint-enforcing RL algorithm that leverages the learned constraints to guide policy optimization towards zero-violation solutions.</li>
-        </ol>
-        
-        <p>
-          The temporal logic formulas provide interpretable constraints that can capture complex temporal dependencies in the demonstrated behaviors. Our approach can express a wide range of safety conditions and task specifications through these logical constraints.
-        </p>
+        <div class="section-title">영상</div>
+        <!-- 영상은 그대로 유지 -->
       </div>
 
       <div class="section">
-        <div class="section-title">Results</div>
-        
-        <div class="results-grid">
-          <div class="result-item">
-            <div class="result-title">Constraint Learning</div>
-            <p>
-              Our method successfully learns meaningful temporal logic constraints from demonstrations. These constraints accurately capture the underlying safety conditions and task specifications demonstrated by experts.
-            </p>
-          </div>
-          
-          <div class="result-item">
-            <div class="result-title">Policy Performance</div>
-            <p>
-              Policies trained with ILCL demonstrate superior generalization to new task variations while maintaining zero constraint violations, outperforming baseline approaches in terms of both task success and safety.
-            </p>
-          </div>
-          
-          <div class="result-item">
-            <div class="result-title">Real-World Robotics</div>
-            <p>
-              We validate our approach on real robotic systems, demonstrating the practical applicability of ILCL for learning safe policies in physical environments with complex constraints.
-            </p>
-          </div>
         </div>
-        
-        <p>
-          Our experiments across various domains demonstrate that ILCL effectively learns constraints from demonstrations and successfully incorporates them into policy optimization to achieve zero-violation policies.
-        </p>
-      </div>
-
-      <div class="section">
-        <div class="section-title" id="bibtex">BibTeX</div>
-        <pre style="background-color: #f5f5f5; padding: 15px; border-radius: 5px; overflow-x: auto;">
-@article{cho2025ilcl,
-  title={ILCL: Inverse Logic-Constraint Learning from Temporally Constrained Demonstrations},
-  author={Cho, Minwoo and Jang, Jaehwi and Park, Daehyung},
-  journal={Under review},
-  year={2025}
-}
-        </pre>
-      </div>
 
       <div class="footer">
         <p>
