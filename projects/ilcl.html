@@ -212,7 +212,7 @@
           <div class="column has-text-centered">
             <div class="publication-links">
               <!-- Paper PDF -->
-              <a href="../data/768_ILCL_Inverse_Logic_Constra.pdf" class="link-block">
+              <a href="../data/ILCL_pdf.pdf" class="link-block">
                 <i class="fas fa-file-pdf"></i>
                 Paper
               </a>
@@ -243,7 +243,7 @@
       <div class="column is-half">
         <div class="teaser">
           <video autoplay muted loop playsinline controls style="width: 100%; height: auto; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
-            <source src="../images/minu/ilcl_short_real_reduced.mp4" type="video/mp4">
+            <source src="../ilcl/gifs/supplementary_video.mp4" type="video/mp4">
           </video>
         </div>
       </div>
@@ -259,7 +259,7 @@
       <ul style="margin-left: 1.5em; list-style-type: disc;">
         <li>We aim to solve the problem of temporal-constraint learning from demonstrations.</li>
         <li>Learning logic constraints is challenging due to the combinatorially large space of possible specifications and the ill-posed nature of non-Markovian constraints.</li>
-        <li>To this end, we propose ILCL, which learns truncated linear temporal logic (TLTL) constraint by tree-based genetic algorithm and logic-constrained RL with constraint redistribution.</li>
+        <li>To this end, we propose ILCL, which learns truncated linear temporal logic (TLTL) constraint by tree-based genetic algorithm <strong>(GA-TL-Mining)</strong> and logic-constrained RL <strong>(Logic-CRL)</strong> with constraint redistribution.</li>
         <li>Our evaluations show ILCL outperforms baselines in learning and transferring TL constraints across simulated scenarios, demonstrating the transferability of our method in real-world peg-in-shallow-hole environments.</li>
       </ul>
     </div>
@@ -269,6 +269,14 @@
       <img src="../ilcl/images/overall_0513.webp" alt="Training Performance" style="max-width:100%; height:auto; border-radius:8px; box-shadow:0 2px 5px rgba(0,0,0,0.1);">
       <!-- <figcaption class="mt-2">Training Performance</figcaption> -->
     </figure>
+    <div class="abstract">
+      <ul style="margin-left: 1.5em; list-style-type: disc;">
+        <li>ILCL learns constraints via a two-player zero-sum game.</li>
+        <li>The constraint player, GA-TL-Mining, searches for the logic constraint that maximally penalizes the policy player's trajectories while labeling demonstrations as safe, by applying a <strong>genetic algorithm</strong> on the <strong>abstract syntax tree space</strong> of the temporal logic.</li>
+        <li>The policy player, Logic-CRL, optimizes a policy that maximizes the reward while satisfying the constraint player's temporal logic constraint, by <strong>redistributing the continuous logic constraint</strong>.</li>
+      </ul>
+    </div>
+
 
     <h2 class="section-title">Results</h2>
 
@@ -280,19 +288,20 @@
       <div class="column">
         <div class="has-text-centered">
           <div style="height: 200px; display: flex; align-items: center; justify-content: center;">
-            <img src="../ilcl/gifs/point1/pointnav_arr_expert_100.gif" alt="Navigation φ₁" style="max-width:100%; max-height:100%; object-fit:contain; border-radius:8px; box-shadow:0 2px 5px rgba(0,0,0,0.1);">
+            <img src="../ilcl/gifs/point1/pointnav_arr_expert_100.gif" alt="Navigation with φ GT1" style="max-width:100%; max-height:100%; object-fit:contain; border-radius:8px; box-shadow:0 2px 5px rgba(0,0,0,0.1);">
           </div>
-          <p class="mt-2 has-text-weight-semibold">Navigation φ₁</p>
+          <p class="mt-2 has-text-weight-semibold">Navigation with φ<sub>GT1</sub></p>
         </div>
       </div>
       <div class="column">
         <div class="has-text-centered">
           <div style="height: 200px; display: flex; align-items: center; justify-content: center;">
-            <img src="../ilcl/gifs/point2/pointnav-waypoint-expert100.gif" alt="Navigation φ₂" style="max-width:100%; max-height:100%; object-fit:contain; border-radius:8px; box-shadow:0 2px 5px rgba(0,0,0,0.1);">
+            <img src="../ilcl/gifs/point2/pointnav-waypoint-expert100.gif" alt="Navigation with φ GT2" style="max-width:100%; max-height:100%; object-fit:contain; border-radius:8px; box-shadow:0 2px 5px rgba(0,0,0,0.1);">
           </div>
-          <p class="mt-2 has-text-weight-semibold">Navigation φ₂</p>
+          <p class="mt-2 has-text-weight-semibold">Navigation with φ<sub>GT2</sub></p>
         </div>
       </div>
+      <!-- 나머지 동일 -->
       <div class="column">
         <div class="has-text-centered">
           <div style="height: 200px; display: flex; align-items: center; justify-content: center;">
@@ -310,12 +319,38 @@
         </div>
       </div>
     </div>
+    <div class="abstract mt-5">
+      <p class="mb-4 has-text-weight-medium">Demonstrations maximize the following goal rewards and satisfy the following constraints:</p>
+      
+      <div style="display: flex; gap: 1rem;">
+        <div style="flex: 1; margin-left: 5rem; margin-right: -20rem;">
+          <h3 class="has-text-weight-semibold">Goals</h3>
+          <ul style="list-style-type: disc; margin-left: 1.5rem;">
+            <li><strong>Navigation with φ<sub>GT1</sub></strong>: Reach to the goal (<span style="color: gold; font-size: 1.2em;">★</span>)</li>
+            <li><strong>Navigation with φ<sub>GT2</sub></strong>: Reach to the goal (<span style="color: gold; font-size: 1.2em;">★</span>)</li>
+            <li><strong>Wiping</strong>: Reach to the <span style="color: green; font-weight: bold;">green</span> flag</li>
+            <li><strong>Peg-in-shallow-hole</strong>: Insert <span style="color: green; font-weight: bold;">peg</span> to the <span style="color: gray; font-weight: bold;">hole</span></li>
+          </ul>
+        </div>
+        
+        <div style="flex: 1;">
+          <h3 class="has-text-weight-semibold">Constraints</h3>
+          <ul style="list-style-type: disc; margin-left: 1.5rem;">
+            <li><strong>Navigation with φ<sub>GT1</sub></strong>: Avoid <span style="color: red; font-weight: bold;">R</span> and avoid <span style="color: blue; font-weight: bold;">B</span> until in <span style="color: green; font-weight: bold;">G</span></li>
+            <li><strong>Navigation with φ<sub>GT2</sub></strong>: Reach <span style="color: red; font-weight: bold;">R</span> → <span style="color: green; font-weight: bold;">G</span> → <span style="color: blue; font-weight: bold;">B</span></li>
+            <li><strong>Wiping</strong>: Avoid contact until reaching the <span style="color: red; font-weight: bold;">red</span> flag and f<sub>c</sub> > threshold afterwards</li>
+            <li><strong>Peg-in-shallow-hole</strong>: As tilted <span style="color: green; font-weight: bold;">peg</span> contacts to the <span style="color: gray; font-weight: bold;">hole</span>, maintain <span style="color: green; font-weight: bold;">peg</span>-to-<span style="color: gray; font-weight: bold;">hole</span> contact and <span style="color: green; font-weight: bold;">peg</span>-to-<span style="color: red; font-weight: bold;">jaw</span> contact until insertion</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+     
     
     <h3 class="is-size-5 has-text-weight-bold mb-3">Transfer Results</h3>
     
     <!-- Navigation φ₁ 이전 결과 (가로 스크롤) -->
     <div class="mb-5">
-      <h4 class="is-size-6 has-text-weight-semibold mb-2 has-text-centered">Navigation φ₁ Transfer</h4>
+      <h4 class="is-size-6 has-text-weight-semibold mb-2 has-text-centered">Navigation with φ<sub>GT1</sub> Transfer</h4>
       <div style="width: 100%; overflow-x: auto; padding-bottom: 5px;">
         <div style="display: flex; flex-direction: row; min-width: min-content; gap: 10px; justify-content: center;">
           <div style="flex: 0 0 auto; width: auto; text-align: center;">
@@ -354,7 +389,7 @@
     
     <!-- Navigation φ₂ 이전 결과 (가로 스크롤) -->
     <div class="mb-5">
-      <h4 class="is-size-6 has-text-weight-semibold mb-2 has-text-centered">Navigation φ₂ Transfer</h4>
+      <h4 class="is-size-6 has-text-weight-semibold mb-2 has-text-centered">Navigation with φ<sub>GT2</sub> Transfer</h4>
       <div style="width: 100%; overflow-x: auto; padding-bottom: 5px;">
         <div style="display: flex; flex-direction: row; min-width: min-content; gap: 10px; justify-content: center;">
           <div style="flex: 0 0 auto; width: auto; text-align: center;">
@@ -439,10 +474,10 @@
     <!-- 통계 결과 이미지 -->
     <h3 class="is-size-5 has-text-weight-bold mb-3 mt-5">Statistical Evaluation</h3>
     
-    <div class="columns is-centered">
+    <!-- <div class="columns is-centered">
       <div class="column">
         <figure class="has-text-centered">
-          <img src="../ilcl/images/train_bar_0414.jpg" alt="Training Performance" style="max-width:100%; height:auto; border-radius:8px; box-shadow:0 2px 5px rgba(0,0,0,0.1);">
+          <img src="../ilcl/images/combined_bars_0701.pdf" alt="Training Performance" style="max-width:100%; height:auto; border-radius:8px; box-shadow:0 2px 5px rgba(0,0,0,0.1);">
           <figcaption class="mt-2">Training Performance</figcaption>
         </figure>
       </div>
@@ -452,9 +487,21 @@
           <figcaption class="mt-2">Transfer Performance</figcaption>
         </figure>
       </div>
-    </div>
+    </div> -->
 
+    <div class="columns is-centered">
+      <div class="column">
+        <figure class="has-text-centered">
+          <img src="../ilcl/images/combined_bars_0701-1.png" alt="Training Performance" style="max-width:100%; height:auto; border-radius:8px; box-shadow:0 2px 5px rgba(0,0,0,0.1);">
+        </figure>
+      </div>
+    </div>
+    <div class="abstract">
+      <p class="has-text-weight-medium">ILCL finds policies that achieve the <strong>lowest violation rate</strong> w.r.t the GT constraints, <strong>expert-level cumulative reward</strong>, and the <strong>lowest TR</strong> (truncated negative robustness).</p>
+    </div>
+    
     <h3 class="is-size-5 has-text-weight-bold mb-3 mt-5">Real-world transfer of the learned constraint (Peg-in-shallow-hole)</h3>
+
     
     <div class="columns is-centered">
       <div class="teaser">
@@ -508,16 +555,6 @@
    
   </div>
 </section>
-
-<footer class="footer">
-  <div class="container">
-    <div class="content has-text-centered">
-      <p class="footer-text">
-        &copy; 2025 RIRO Lab, KAIST. All Rights Reserved.
-      </p>
-    </div>
-  </div>
-</footer>
 
 <script>
   // Optional JavaScript can be added here
