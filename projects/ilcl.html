@@ -14,7 +14,7 @@
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.4/css/bulma.min.css" integrity="sha512-HqxHUkJM0SYcbvxUw5P60SzdOTy/QVwA1JJrvaXJv4q7lmbDZCmZaqz01UPOaQveoxfYRv1tHozWGPMcuTBuvQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
   <style>
     :root {
       --primary-color: #4a6fa5;
@@ -198,7 +198,7 @@
               <a href="https://minchou.github.io/">Minwoo Cho</a><sup>1</sup>,
             </span>
             <span class="author-block">
-              <a href="https://wognl0402.github.io/">Jaehwi Jang</a><sup>2</sup>,
+              <a href="https://wognl0402.github.io/">Jaehwi Jang</a><sup>1,2</sup>,
             </span>
             <span class="author-block">
               <a href="https://sites.google.com/site/daehyungpark/">Daehyung Park</a><sup>1</sup>
@@ -211,8 +211,12 @@
 
           <div class="column has-text-centered">
             <div class="publication-links">
+              <a href="https://arxiv.org/abs/2507.11000" class="link-block">
+                <i class="ai ai-arxiv"></i>
+                arXiv
+              </a>
               <!-- Paper PDF -->
-              <a href="../data/ILCL_pdf.pdf" class="link-block">
+              <a href="../data/ILCL_arxiv.pdf" class="link-block">
                 <i class="fas fa-file-pdf"></i>
                 Paper
               </a>
@@ -234,19 +238,39 @@
     <div class="columns is-centered">
       <div class="column is-half">
         <div class="teaser">
-          <video autoplay muted loop playsinline controls style="width: 100%; height: auto; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
-            <source src="../images/minu/ilcl_short_real_reduced.mp4" type="video/mp4">
-          </video>
+          <iframe 
+            width="100%" 
+            height="315" 
+            src="https://www.youtube.com/embed/D4mdRBfeL0c" 
+            title="YouTube video player" 
+            frameborder="0" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+            allowfullscreen
+            style="border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+          </iframe>
         </div>
       </div>
-      
       <div class="column is-half">
+        <div class="teaser">
+          <iframe 
+            width="100%" 
+            height="315" 
+            src="https://www.youtube.com/embed/VGV4wedr1fQ" 
+            title="YouTube video player" 
+            frameborder="0" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+            allowfullscreen
+            style="border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+          </iframe>
+        </div>
+      </div>
+      <!-- <div class="column is-half">
         <div class="teaser">
           <video autoplay muted loop playsinline controls style="width: 100%; height: auto; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
             <source src="../ilcl/gifs/supplementary_video.mp4" type="video/mp4">
           </video>
         </div>
-      </div>
+      </div> -->
     </div>
 
     <!-- <div class="coming-soon">
@@ -503,56 +527,124 @@
     <h3 class="is-size-5 has-text-weight-bold mb-3 mt-5">Real-world transfer of the learned constraint (Peg-in-shallow-hole)</h3>
 
     
-    <div class="columns is-centered">
+    <!-- <div class="columns is-centered">
       <div class="teaser">
         <video autoplay muted loop playsinline controls>
           <source src="../ilcl/gifs/ilcl_real.mp4" type="video/mp4">
         </video>
       </div>
-  
+    </div> -->
+
+    <div class="columns is-centered">
+      <div class="teaser">
+        <iframe 
+          width="100%" 
+          height="720" 
+          src="https://www.youtube.com/embed/8rVsAvO2ymk" 
+          title="YouTube video player" 
+          frameborder="0" 
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+          allowfullscreen
+          style="border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+        </iframe>
+      </div>
     </div>
 
-    <h3 class="is-size-5 has-text-weight-bold mb-3 mt-5">Evaluation rollouts (3 different hole angles)</h3>
+    <!-- <h3 class="is-size-5 has-text-weight-bold mb-3 mt-5">Evaluation rollouts (3 different hole angles)</h3>
       <div class="columns is-centered">
-        <!-- 첫 번째 비디오 (기준) -->
         <div class="column is-4">
           <figure class="has-text-centered">
             <div style="position: relative; display: flex; align-items: center; justify-content: center;">
               <video autoplay muted loop playsinline controls style="width: 100%; height: auto; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
-                <source src="../ilcl/gifs/90-2times-reduced.mp4" type="video/mp4">
+                <source src="../ilcl/gifs/90-2times-reduced.mp4" type="video/mp4"> https://youtube.com/shorts/3NQ7U5nEPao?feature=share
               </video>
             </div>
             <figcaption class="mt-2">90°</figcaption>
           </figure>
         </div>
         
-        <!-- 두 번째 비디오 (첫 번째에 맞춤) -->
         <div class="column is-4">
           <figure class="has-text-centered">
             <div style="position: relative; display: flex; align-items: center; justify-content: center; overflow: hidden; aspect-ratio: 5/6;">
-              <!-- 4/3은 예시입니다. 첫 번째 비디오의 실제 비율에 맞게 조정하세요 -->
               <video autoplay muted loop playsinline controls style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
-                <source src="../ilcl/gifs/eval_60_2x_reduce.mp4" type="video/mp4">
+                <source src="../ilcl/gifs/eval_60_2x_reduce.mp4" type="video/mp4"> https://youtube.com/shorts/0c7mr1qH3Ac?feature=share
               </video>
             </div>
             <figcaption class="mt-2">60°</figcaption>
           </figure>
         </div>
         
-        <!-- 세 번째 비디오 (첫 번째에 맞춤) -->
         <div class="column is-4">
           <figure class="has-text-centered">
             <div style="position: relative; display: flex; align-items: center; justify-content: center; overflow: hidden; aspect-ratio: 5/6;">
-              <!-- 4/3은 예시입니다. 첫 번째 비디오의 실제 비율에 맞게 조정하세요 -->
               <video autoplay muted loop playsinline controls style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
-                <source src="../ilcl/gifs/eval_25_2x_reduced.mp4" type="video/mp4">
+                <source src="../ilcl/gifs/eval_25_2x_reduced.mp4" type="video/mp4"> https://youtube.com/shorts/3stPWhGGZP4?feature=share
               </video>
             </div>
             <figcaption class="mt-2">-25°</figcaption>
           </figure>
         </div>
       </div>
-   
+    -->
+  <h3 class="is-size-5 has-text-weight-bold mb-3 mt-5">Evaluation rollouts (3 different hole angles)</h3>
+<div class="columns is-centered">
+  <!-- 첫 번째 비디오 (기준) -->
+  <div class="column is-4">
+    <figure class="has-text-centered">
+      <div style="position: relative; display: flex; align-items: center; justify-content: center;">
+        <iframe 
+          width="100%" 
+          height="480" 
+          src="https://www.youtube.com/embed/3NQ7U5nEPao" 
+          title="YouTube video player" 
+          frameborder="0" 
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+          allowfullscreen
+          style="border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+        </iframe>
+      </div>
+      <figcaption class="mt-2">90°</figcaption>
+    </figure>
+  </div>
+  
+  <!-- 두 번째 비디오 -->
+  <div class="column is-4">
+    <figure class="has-text-centered">
+      <div style="position: relative; display: flex; align-items: center; justify-content: center;">
+        <iframe 
+          width="100%" 
+          height="480" 
+          src="https://www.youtube.com/embed/0c7mr1qH3Ac" 
+          title="YouTube video player" 
+          frameborder="0" 
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+          allowfullscreen
+          style="border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+        </iframe>
+      </div>
+      <figcaption class="mt-2">60°</figcaption>
+    </figure>
+  </div>
+  
+  <!-- 세 번째 비디오 -->
+  <div class="column is-4">
+    <figure class="has-text-centered">
+      <div style="position: relative; display: flex; align-items: center; justify-content: center;">
+        <iframe 
+          width="100%" 
+          height="480" 
+          src="https://www.youtube.com/embed/3stPWhGGZP4" 
+          title="YouTube video player" 
+          frameborder="0" 
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+          allowfullscreen
+          style="border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+        </iframe>
+      </div>
+      <figcaption class="mt-2">-25°</figcaption>
+    </figure>
+  </div>
+</div>
   </div>
 </section>
 
