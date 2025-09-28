@@ -22,8 +22,11 @@
                 <p class="name" style="text-align: center;">
                   Minwoo Cho
                 </p>
-                <p>I am an M.S. student in Computer Science at KAIST, specializing in Reinforcement Learning (RL) and Robotics. Under the supervision of Prof. <a href="https://sites.google.com/site/daehyungpark/"> Daehyung Park</a> in the <a href="https://rirolab.github.io/">RIRO (Robust Intelligence & RObotics) Lab</a>, I am currently working on learning constraints—such as safety conditions and task specifications—from demonstrations. By incorporating these constraints into reinforcement learning, I aim to develop policies that are both generalizable and safe in real-world applications.</p>
-                <p>I received my B.S. from KAIST in 2023, where I majored in Mechanical Engineering and minored in Mathematical Sciences. I had the honor of being awarded the KAIST Presidential Fellowship. </p>
+                <p>I am an intern of <a href="https://youngwoon.github.io">RLLAB</a> in Yonsei Univ., specializing in Reinforcement Learning (RL) and Robotics.  Under the supervision of Prof. <a href="https://youngwoon.github.io/youngwoon"> Youngwoon Lee</a>, I am currently working on learning ego-centric visual policies for humanoid whole-body control.
+                  I achieved my M.S. degree in KAIST C.S. in 2025, under the supervision of Prof. <a href="https://sites.google.com/site/daehyungpark/"> Daehyung Park</a> in the <a href="https://rirolab.github.io/">RIRO (Robust Intelligence & RObotics) Lab</a>. I worked on learning constraints (e.g., safety conditions and task specifications) from demonstrations. </p>
+                <p>I received my B.S. from KAIST in 2023, where I majored in Mechanical Engineering and minored in Mathematical Sciences. I had the honor of being awarded the KAIST Presidential Fellowship. (Last updated 2025.9.) </p>
+                <!-- <p>I am an M.S. student in Computer Science at KAIST, specializing in Reinforcement Learning (RL) and Robotics. Under the supervision of Prof. <a href="https://sites.google.com/site/daehyungpark/"> Daehyung Park</a> in the <a href="https://rirolab.github.io/">RIRO (Robust Intelligence & RObotics) Lab</a>, I am currently working on learning constraints—such as safety conditions and task specifications—from demonstrations. By incorporating these constraints into reinforcement learning, I aim to develop policies that are both generalizable and safe in real-world applications.</p>
+                <p>I received my B.S. from KAIST in 2023, where I majored in Mechanical Engineering and minored in Mathematical Sciences. I had the honor of being awarded the KAIST Presidential Fellowship. </p> -->
                 <p style="text-align:center">
                   <a href="mailto:cmw9903@kaist.ac.kr">Email</a> &nbsp;/&nbsp;
                   <a href="data/CV_MinwooCho_202502.pdf">CV</a> &nbsp;/&nbsp;
@@ -40,20 +43,23 @@
               <td style="padding:16px;width:100%;vertical-align:middle">
                 <h2>Research Interest</h2>
                 <p>
-                    My research focuses on applying RL to real-world robotics, where several fundamental challenges such as uncertainty or sample efficiency still hinder deployment on physical robots. To address these challenges, my current research interests include:
+                  My ultimate research goal is to build a robotic agent that can learn new skills quickly on its own, like a human.
                 </p>
                 <ul>
-                    <li>
-                        <b>RL with constraints:</b> Unlike rewards, constraints can effectively restrict unintended or unsafe behavior, which is crucial for real-world deployment. However, these constraints are often difficult to explicitly define and ensuring the learning of zero-violation policies in complex domains remains challenging. How can we effectively learn and leverage such constraints?
-                    </li>
-                    <br>
-                    <li>
-                        <b>Offline-to-Online RL (O2O):</b> Since collecting real-world data is expensive, O2O RL methods offer a promising approach to improve sample efficiency and bridge the sim-to-real gap. Further reducing the number of online interactions and applying these methods in safety-critical settings is essential for real-world deployment.
-                    </li>
-                    <br>
-                    <li>
-                        <b>Learning from video:</b> Learning task knowledge from videos can eliminate the need for handcrafted rewards in RL. Just as humans learn by observing, I'm interested in enabling robots to acquire high-quality skills from a diverse range of videos without requiring task-specific designs.
-                    </li>
+                  <li>
+                    <b>RL with priors:</b>
+                    RL becomes sample-inefficient when the agent’s degrees of freedom are high. How can we learn good priors that effectively reduce the exploration space, enabling the agent to learn challenging tasks with simple rewards?
+                  </li>
+                  <br>
+                  <li>
+                    <b>Humanoids:</b>
+                    Humanoid morphology offers human-level capabilities. Scaling humanoid policies with egocentric vision would enable robots to perceive and act autonomously, as humans do.
+                  </li>
+                  <br>
+                  <li>
+                    <b>Reward learning:</b>
+                    RL enables learning new skills, but we often need well-engineered rewards. Can we mitigate this by learning like humans—e.g., from videos or language feedbacks?
+                  </li>
                 </ul>
               </td>
             </tr>
