@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description" content="ILCL: Inverse Logic-Constraint Learning from Temporally Constrained Demonstrations">
+  <meta name="keywords" content="Reinforcement Learning, Constraints, Temporal Logic, Demonstrations">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ILCL: Inverse Logic-Constraint Learning from Temporally Constrained Demonstrations</title>
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script> -->
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.4/css/bulma.min.css" integrity="sha512-HqxHUkJM0SYcbvxUw5P60SzdOTy/QVwA1JJrvaXJv4q7lmbDZCmZaqz01UPOaQveoxfYRv1tHozWGPMcuTBuvQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <style>
+    :root {
+      --primary-color: #4a6fa5;
+      --text-color: #111;
+      --background-color: #f8f9fa;
+      --paper-color: white;
+      --footer-color: #f0f4f8;
+    }
+
+    body {
+      font-family: 'Google Sans', sans-serif;
+      color: var(--text-color);
+      background-color: var(--background-color);
+      margin: 0;
+      padding: 0;
+    }
+
+    .hero {
+      background-color: var(--paper-color);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    }
+
+    .hero-body {
+      padding: 3rem 1.5rem;
+    }
+
+    .title {
+      font-family: 'Google Sans', sans-serif;
+      font-weight: bold;
+    }
+
+    .publication-title {
+      font-size: 2.5rem;
+      font-weight: bold;
+      text-align: center;
+    }
+
+    .publication-authors {
+      font-size: 1.2rem;
+      text-align: center;
+      margin-top: 1rem;
+    }
+
+    .author-block {
+      display: inline-block;
+      margin-right: 10px;
+    }
+
+    .publication-banner {
+      max-height: 300px;
+      width: 100%;
+      object-fit: cover;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .publication-links {
+      margin-top: 2rem;
+      text-align: center;
+    }
+
+    .link-block {
+      margin: 0.5rem;
+      border-radius: 4px;
+      padding: 0.5rem 0.75rem;
+      background-color: var(--primary-color);
+      color: white !important;
+      display: inline-block;
+      font-weight: bold;
+      transition: background-color 0.3s ease;
+    }
+
+    .link-block:hover {
+      background-color: #3a5a8c;
+    }
+
+    .link-block i {
+      margin-right: 5px;
+    }
+
+    .section-title {
+      font-size: 1.5rem;
+      font-weight: bold;
+      margin-bottom: 1rem;
+      color: var(--primary-color);
+      border-bottom: 2px solid var(--primary-color);
+      padding-bottom: 0.5rem;
+    }
+
+    .abstract {
+      background-color: var(--footer-color);
+      padding: 1.5rem;
+      border-radius: 8px;
+      margin-bottom: 2rem;
+    }
+
+    .content-block {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 1.5rem;
+    }
+
+    .teaser {
+      position: relative;
+      width: 100%;
+      padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+      height: 0;
+      margin-bottom: 2rem;
+    }
+
+    .teaser video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .coming-soon {
+      text-align: center;
+      padding: 3rem 0;
+      background-color: var(--footer-color);
+      border-radius: 8px;
+      margin: 2rem 0;
+    }
+
+    .coming-soon h3 {
+      font-size: 1.8rem;
+      color: var(--primary-color);
+      margin-bottom: 1rem;
+    }
+
+    .footer {
+      background-color: var(--footer-color);
+      padding: 3rem 1.5rem;
+      text-align: center;
+    }
+
+    .footer-text {
+      font-size: 0.9rem;
+    }
+
+    .logo-container {
+      margin-top: 2rem;
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+    }
+
+    .logo-image {
+      max-height: 50px;
+    }
+
+    @media (max-width: 768px) {
+      .publication-title {
+        font-size: 2rem;
+      }
+      
+      .publication-authors {
+        font-size: 1rem;
+      }
+      
+      .author-block {
+        display: inline;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container">
+      <div class="columns is-centered">
+        <div class="column is-full-width">
+          <h1 class="publication-title">ILCL: Inverse Logic-Constraint Learning from Temporally Constrained Demonstrations</h1>
+          <div class="publication-authors">
+            <span class="author-block">
+              <a href="https://minchou.github.io/">Minwoo Cho</a><sup>1</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://wognl0402.github.io/">Jaehwi Jang</a><sup>1,2</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://sites.google.com/site/daehyungpark/">Daehyung Park</a><sup>1</sup>
+            </span>
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><sup>1</sup>KAIST, <sup>2</sup>Georgia Institute of Technology</span>
+          </div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <a href="https://arxiv.org/abs/2507.11000" class="link-block">
+                <i class="ai ai-arxiv"></i>
+                arXiv
+              </a>
+              <!-- Paper PDF -->
+              <a href="../data/ILCL_arxiv.pdf" class="link-block">
+                <i class="fas fa-file-pdf"></i>
+                Paper
+              </a>
+              <!-- Code (uncomment when available) -->
+              <a href="" class="link-block">
+                <i class="fab fa-github"></i>
+                Code
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container content-block">
+    <div class="columns is-centered">
+      <div class="column is-half">
+        <div class="teaser">
+          <iframe 
+            width="100%" 
+            height="315" 
+            src="https://www.youtube.com/embed/D4mdRBfeL0c" 
+            title="YouTube video player" 
+            frameborder="0" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+            allowfullscreen
+            style="border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+          </iframe>
+        </div>
+      </div>
+      <div class="column is-half">
+        <div class="teaser">
+          <iframe 
+            width="100%" 
+            height="315" 
+            src="https://www.youtube.com/embed/VGV4wedr1fQ" 
+            title="YouTube video player" 
+            frameborder="0" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+            allowfullscreen
+            style="border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+          </iframe>
+        </div>
+      </div>
+      <!-- <div class="column is-half">
+        <div class="teaser">
+          <video autoplay muted loop playsinline controls style="width: 100%; height: auto; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+            <source src="../ilcl/gifs/supplementary_video.mp4" type="video/mp4">
+          </video>
+        </div>
+      </div> -->
+    </div>
+
+    <!-- <div class="coming-soon">
+      <h3> Coming Soon </h3>
+      <p>This project page is currently under construction.</p>
+    </div> -->
+
+    <h2 class="section-title">Abstract</h2>
+    <div class="abstract">
+      <ul style="margin-left: 1.5em; list-style-type: disc;">
+        <li>We aim to solve the problem of temporal-constraint learning from demonstrations.</li>
+        <li>Learning logic constraints is challenging due to the combinatorially large space of possible specifications and the ill-posed nature of non-Markovian constraints.</li>
+        <li>To this end, we propose ILCL, which learns truncated linear temporal logic (TLTL) constraint by tree-based genetic algorithm <strong>(GA-TL-Mining)</strong> and logic-constrained RL <strong>(Logic-CRL)</strong> with constraint redistribution.</li>
+        <li>Our evaluations show ILCL outperforms baselines in learning and transferring TL constraints across simulated scenarios, demonstrating the transferability of our method in real-world peg-in-shallow-hole environments.</li>
+      </ul>
+    </div>
+
+    <h2 class="section-title">Method</h2>
+    <figure class="has-text-centered">
+      <img src="../ilcl/images/overall_0611.webp" alt="Training Performance" style="max-width:100%; height:auto; border-radius:8px; box-shadow:0 2px 5px rgba(0,0,0,0.1);">
+      <!-- <figcaption class="mt-2">Training Performance</figcaption> -->
+    </figure>
+    <div class="abstract">
+      <ul style="margin-left: 1.5em; list-style-type: disc;">
+        <li>ILCL learns constraints via a two-player zero-sum game.</li>
+        <li>The constraint player, GA-TL-Mining, searches for the logic constraint that maximally penalizes the policy player's trajectories while labeling demonstrations as safe, by applying a <strong>genetic algorithm</strong> on the <strong>abstract syntax tree space</strong> of the temporal logic.</li>
+        <li>The policy player, Logic-CRL, optimizes a policy that maximizes the reward while satisfying the constraint player's temporal logic constraint, by <strong>redistributing the continuous logic constraint</strong>.</li>
+      </ul>
+    </div>
+
+
+    <h2 class="section-title">Results</h2>
+
+    <!-- 시뮬레이션 환경 GIF (제목 추가) -->
+    <h3 class="is-size-5 has-text-weight-bold mb-3 text-center">Demonstrations in Simulated Environment</h3>
+    
+    <!-- 시뮬레이션 환경 GIF (4개 한 줄) -->
+    <div class="columns is-centered mb-5">
+      <div class="column">
+        <div class="has-text-centered">
+          <div style="height: 200px; display: flex; align-items: center; justify-content: center;">
+            <img src="../ilcl/gifs/point1/pointnav_arr_expert_100.gif" alt="Navigation with φ GT1" style="max-width:100%; max-height:100%; object-fit:contain; border-radius:8px; box-shadow:0 2px 5px rgba(0,0,0,0.1);">
+          </div>
+          <p class="mt-2 has-text-weight-semibold">Navigation with φ<sub>GT1</sub></p>
+        </div>
+      </div>
+      <div class="column">
+        <div class="has-text-centered">
+          <div style="height: 200px; display: flex; align-items: center; justify-content: center;">
+            <img src="../ilcl/gifs/point2/pointnav-waypoint-expert100.gif" alt="Navigation with φ GT2" style="max-width:100%; max-height:100%; object-fit:contain; border-radius:8px; box-shadow:0 2px 5px rgba(0,0,0,0.1);">
+          </div>
+          <p class="mt-2 has-text-weight-semibold">Navigation with φ<sub>GT2</sub></p>
+        </div>
+      </div>
+      <!-- 나머지 동일 -->
+      <div class="column">
+        <div class="has-text-centered">
+          <div style="height: 200px; display: flex; align-items: center; justify-content: center;">
+            <img src="../ilcl/gifs/wipe/wiping_expert_100.gif" alt="Wiping" style="max-width:100%; max-height:100%; object-fit:contain; border-radius:8px; box-shadow:0 2px 5px rgba(0,0,0,0.1);">
+          </div>
+          <p class="mt-2 has-text-weight-semibold">Wiping</p>
+        </div>
+      </div>
+      <div class="column">
+        <div class="has-text-centered">
+          <div style="height: 200px; display: flex; align-items: center; justify-content: center;">
+            <img src="../ilcl/gifs/peg/peginshallow-expert.gif" alt="Peg-in-shallow-hole" style="max-width:100%; max-height:100%; object-fit:contain; border-radius:8px; box-shadow:0 2px 5px rgba(0,0,0,0.1);">
+          </div>
+          <p class="mt-2 has-text-weight-semibold">Peg-in-shallow-hole</p>
+        </div>
+      </div>
+    </div>
+    <div class="abstract mt-5">
+      <p class="mb-4 has-text-weight-medium">Demonstrations maximize the following goal rewards and satisfy the following constraints:</p>
+      
+      <div style="display: flex; gap: 1rem;">
+        <div style="flex: 1; margin-left: 5rem; margin-right: -20rem;">
+          <h3 class="has-text-weight-semibold">Goals</h3>
+          <ul style="list-style-type: disc; margin-left: 1.5rem;">
+            <li><strong>Navigation with φ<sub>GT1</sub></strong>: Reach to the goal (<span style="color: gold; font-size: 1.2em;">★</span>)</li>
+            <li><strong>Navigation with φ<sub>GT2</sub></strong>: Reach to the goal (<span style="color: gold; font-size: 1.2em;">★</span>)</li>
+            <li><strong>Wiping</strong>: Reach to the <span style="color: rgb(255, 0, 0); font-weight: bold;">red</span> flag</li>
+            <li><strong>Peg-in-shallow-hole</strong>: Insert <span style="color: green; font-weight: bold;">peg</span> to the <span style="color: gray; font-weight: bold;">hole</span></li>
+          </ul>
+        </div>
+        
+        <div style="flex: 1;">
+          <h3 class="has-text-weight-semibold">Constraints</h3>
+          <ul style="list-style-type: disc; margin-left: 1.5rem;">
+            <li><strong>Navigation with φ<sub>GT1</sub></strong>: Avoid <span style="color: red; font-weight: bold;">R</span> and avoid <span style="color: blue; font-weight: bold;">B</span> until in <span style="color: green; font-weight: bold;">G</span></li>
+            <li><strong>Navigation with φ<sub>GT2</sub></strong>: Reach <span style="color: red; font-weight: bold;">R</span> → <span style="color: green; font-weight: bold;">G</span> → <span style="color: blue; font-weight: bold;">B</span></li>
+            <li><strong>Wiping</strong>: Avoid contact until reaching the <span style="color: green; font-weight: bold;">green</span> flag and f<sub>c</sub> > threshold afterwards</li>
+            <li><strong>Peg-in-shallow-hole</strong>: As tilted <span style="color: green; font-weight: bold;">peg</span> contacts to the <span style="color: gray; font-weight: bold;">hole</span>, maintain <span style="color: green; font-weight: bold;">peg</span>-to-<span style="color: gray; font-weight: bold;">hole</span> contact and <span style="color: green; font-weight: bold;">peg</span>-to-<span style="color: red; font-weight: bold;">jaw</span> contact until insertion</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+     
+    
+    <h3 class="is-size-5 has-text-weight-bold mb-3">Transfer Results</h3>
+    
+    <!-- Navigation φ₁ 이전 결과 (가로 스크롤) -->
+    <div class="mb-5">
+      <h4 class="is-size-6 has-text-weight-semibold mb-2 has-text-centered">Navigation with φ<sub>GT1</sub> Transfer</h4>
+      <div style="width: 100%; overflow-x: auto; padding-bottom: 5px;">
+        <div style="display: flex; flex-direction: row; min-width: min-content; gap: 10px; justify-content: center;">
+          <div style="flex: 0 0 auto; width: auto; text-align: center;">
+            <img src="../ilcl/gifs/point1/learned_policy010.gif" alt="Transfer 1" style="height:160px; width:auto; border-radius:8px; box-shadow:0 2px 5px rgba(0,0,0,0.1);">
+          </div>
+          <div style="flex: 0 0 auto; width: auto; text-align: center;">
+            <img src="../ilcl/gifs/point1/learned_policy011.gif" alt="Transfer 2" style="height:160px; width:auto; border-radius:8px; box-shadow:0 2px 5px rgba(0,0,0,0.1);">
+          </div>
+          <div style="flex: 0 0 auto; width: auto; text-align: center;">
+            <img src="../ilcl/gifs/point1/learned_policy012.gif" alt="Transfer 3" style="height:160px; width:auto; border-radius:8px; box-shadow:0 2px 5px rgba(0,0,0,0.1);">
+          </div>
+          <div style="flex: 0 0 auto; width: auto; text-align: center;">
+            <img src="../ilcl/gifs/point1/learned_policy013.gif" alt="Transfer 4" style="height:160px; width:auto; border-radius:8px; box-shadow:0 2px 5px rgba(0,0,0,0.1);">
+          </div>
+          <div style="flex: 0 0 auto; width: auto; text-align: center;">
+            <img src="../ilcl/gifs/point1/learned_policy014.gif" alt="Transfer 5" style="height:160px; width:auto; border-radius:8px; box-shadow:0 2px 5px rgba(0,0,0,0.1);">
+          </div>
+          <div style="flex: 0 0 auto; width: auto; text-align: center;">
+            <img src="../ilcl/gifs/point1/learned_policy015.gif" alt="Transfer 6" style="height:160px; width:auto; border-radius:8px; box-shadow:0 2px 5px rgba(0,0,0,0.1);">
+          </div>
+          <div style="flex: 0 0 auto; width: auto; text-align: center;">
+            <img src="../ilcl/gifs/point1/learned_policy016.gif" alt="Transfer 7" style="height:160px; width:auto; border-radius:8px; box-shadow:0 2px 5px rgba(0,0,0,0.1);">
+          </div>
+          <div style="flex: 0 0 auto; width: auto; text-align: center;">
+            <img src="../ilcl/gifs/point1/learned_policy017.gif" alt="Transfer 8" style="height:160px; width:auto; border-radius:8px; box-shadow:0 2px 5px rgba(0,0,0,0.1);">
+          </div>
+          <div style="flex: 0 0 auto; width: auto; text-align: center;">
+            <img src="../ilcl/gifs/point1/learned_policy018.gif" alt="Transfer 9" style="height:160px; width:auto; border-radius:8px; box-shadow:0 2px 5px rgba(0,0,0,0.1);">
+          </div>
+          <div style="flex: 0 0 auto; width: auto; text-align: center;">
+            <img src="../ilcl/gifs/point1/learned_policy019.gif" alt="Transfer 10" style="height:160px; width:auto; border-radius:8px; box-shadow:0 2px 5px rgba(0,0,0,0.1);">
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Navigation φ₂ 이전 결과 (가로 스크롤) -->
+    <div class="mb-5">
+      <h4 class="is-size-6 has-text-weight-semibold mb-2 has-text-centered">Navigation with φ<sub>GT2</sub> Transfer</h4>
+      <div style="width: 100%; overflow-x: auto; padding-bottom: 5px;">
+        <div style="display: flex; flex-direction: row; min-width: min-content; gap: 10px; justify-content: center;">
+          <div style="flex: 0 0 auto; width: auto; text-align: center;">
+            <img src="../ilcl/gifs/point2/learned_policy110.gif" alt="Transfer 1" style="height:160px; width:auto; border-radius:8px; box-shadow:0 2px 5px rgba(0,0,0,0.1);">
+          </div>
+          <div style="flex: 0 0 auto; width: auto; text-align: center;">
+            <img src="../ilcl/gifs/point2/learned_policy111.gif" alt="Transfer 2" style="height:160px; width:auto; border-radius:8px; box-shadow:0 2px 5px rgba(0,0,0,0.1);">
+          </div>
+          <div style="flex: 0 0 auto; width: auto; text-align: center;">
+            <img src="../ilcl/gifs/point2/learned_policy112.gif" alt="Transfer 3" style="height:160px; width:auto; border-radius:8px; box-shadow:0 2px 5px rgba(0,0,0,0.1);">
+          </div>
+          <div style="flex: 0 0 auto; width: auto; text-align: center;">
+            <img src="../ilcl/gifs/point2/learned_policy113.gif" alt="Transfer 4" style="height:160px; width:auto; border-radius:8px; box-shadow:0 2px 5px rgba(0,0,0,0.1);">
+          </div>
+          <div style="flex: 0 0 auto; width: auto; text-align: center;">
+            <img src="../ilcl/gifs/point2/learned_policy114.gif" alt="Transfer 5" style="height:160px; width:auto; border-radius:8px; box-shadow:0 2px 5px rgba(0,0,0,0.1);">
+          </div>
+          <div style="flex: 0 0 auto; width: auto; text-align: center;">
+            <img src="../ilcl/gifs/point2/learned_policy115.gif" alt="Transfer 6" style="height:160px; width:auto; border-radius:8px; box-shadow:0 2px 5px rgba(0,0,0,0.1);">
+          </div>
+          <div style="flex: 0 0 auto; width: auto; text-align: center;">
+            <img src="../ilcl/gifs/point2/learned_policy116.gif" alt="Transfer 7" style="height:160px; width:auto; border-radius:8px; box-shadow:0 2px 5px rgba(0,0,0,0.1);">
+          </div>
+          <div style="flex: 0 0 auto; width: auto; text-align: center;">
+            <img src="../ilcl/gifs/point2/learned_policy117.gif" alt="Transfer 8" style="height:160px; width:auto; border-radius:8px; box-shadow:0 2px 5px rgba(0,0,0,0.1);">
+          </div>
+          <div style="flex: 0 0 auto; width: auto; text-align: center;">
+            <img src="../ilcl/gifs/point2/learned_policy118.gif" alt="Transfer 9" style="height:160px; width:auto; border-radius:8px; box-shadow:0 2px 5px rgba(0,0,0,0.1);">
+          </div>
+          <div style="flex: 0 0 auto; width: auto; text-align: center;">
+            <img src="../ilcl/gifs/point2/learned_policy119.gif" alt="Transfer 10" style="height:160px; width:auto; border-radius:8px; box-shadow:0 2px 5px rgba(0,0,0,0.1);">
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Wiping과 Peg-in-shallow-hole Transfer 결과를 한 행에 배치 -->
+    <div class="columns is-centered mb-5">
+      <!-- Wiping Transfer -->
+      <div class="column">
+        <h4 class="is-size-6 has-text-weight-semibold mb-2 has-text-centered">Wiping Transfer</h4>
+        <div style="width: 100%; overflow-x: auto; padding-bottom: 5px; height: 180px;">
+          <div style="display: flex; flex-direction: row; min-width: min-content; gap: 10px; justify-content: center; height: 100%;">
+            <div style="flex: 0 0 auto; width: auto; text-align: center;">
+              <img src="../ilcl/gifs/wipe/learned_policy210.gif" alt="Transfer 1" style="height:160px; width:auto; border-radius:8px; box-shadow:0 2px 5px rgba(0,0,0,0.1);">
+            </div>
+            <div style="flex: 0 0 auto; width: auto; text-align: center;">
+              <img src="../ilcl/gifs/wipe/learned_policy211.gif" alt="Transfer 2" style="height:160px; width:auto; border-radius:8px; box-shadow:0 2px 5px rgba(0,0,0,0.1);">
+            </div>
+            <div style="flex: 0 0 auto; width: auto; text-align: center;">
+              <img src="../ilcl/gifs/wipe/learned_policy212.gif" alt="Transfer 3" style="height:160px; width:auto; border-radius:8px; box-shadow:0 2px 5px rgba(0,0,0,0.1);">
+            </div>
+            <div style="flex: 0 0 auto; width: auto; text-align: center;">
+              <img src="../ilcl/gifs/wipe/learned_policy213.gif" alt="Transfer 4" style="height:160px; width:auto; border-radius:8px; box-shadow:0 2px 5px rgba(0,0,0,0.1);">
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Peg-in-shallow-hole Transfer -->
+      <div class="column">
+        <h4 class="is-size-6 has-text-weight-semibold mb-2 has-text-centered">Peg-in-shallow-hole Transfer</h4>
+        <div style="width: 100%; overflow-x: auto; padding-bottom: 5px; height: 180px;">
+          <div style="display: flex; flex-direction: row; min-width: min-content; gap: 10px; justify-content: center; height: 100%;">
+            <div style="flex: 0 0 auto; width: auto; text-align: center;">
+              <img src="../ilcl/gifs/peg/learned_policy30.gif" alt="Transfer 1" style="height:160px; width:auto; border-radius:8px; box-shadow:0 2px 5px rgba(0,0,0,0.1);">
+            </div>
+            <div style="flex: 0 0 auto; width: auto; text-align: center;">
+              <img src="../ilcl/gifs/peg/learned_policy31.gif" alt="Transfer 2" style="height:160px; width:auto; border-radius:8px; box-shadow:0 2px 5px rgba(0,0,0,0.1);">
+            </div>
+            <div style="flex: 0 0 auto; width: auto; text-align: center;">
+              <img src="../ilcl/gifs/peg/learned_policy32.gif" alt="Transfer 3" style="height:160px; width:auto; border-radius:8px; box-shadow:0 2px 5px rgba(0,0,0,0.1);">
+            </div>
+            <div style="flex: 0 0 auto; width: auto; text-align: center;">
+              <img src="../ilcl/gifs/peg/learned_policy33.gif" alt="Transfer 4" style="height:160px; width:auto; border-radius:8px; box-shadow:0 2px 5px rgba(0,0,0,0.1);">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- 통계 결과 이미지 -->
+    <h3 class="is-size-5 has-text-weight-bold mb-3 mt-5">Statistical Evaluation</h3>
+    
+    <!-- <div class="columns is-centered">
+      <div class="column">
+        <figure class="has-text-centered">
+          <img src="../ilcl/images/combined_bars_0701.pdf" alt="Training Performance" style="max-width:100%; height:auto; border-radius:8px; box-shadow:0 2px 5px rgba(0,0,0,0.1);">
+          <figcaption class="mt-2">Training Performance</figcaption>
+        </figure>
+      </div>
+      <div class="column">
+        <figure class="has-text-centered">
+          <img src="../ilcl/images/transfer_bar_0414.jpg" alt="Transfer Performance" style="max-width:100%; height:auto; border-radius:8px; box-shadow:0 2px 5px rgba(0,0,0,0.1);">
+          <figcaption class="mt-2">Transfer Performance</figcaption>
+        </figure>
+      </div>
+    </div> -->
+
+    <div class="columns is-centered">
+      <div class="column">
+        <figure class="has-text-centered">
+          <img src="../ilcl/images/combined_bars_0701-1.png" alt="Training Performance" style="max-width:100%; height:auto; border-radius:8px; box-shadow:0 2px 5px rgba(0,0,0,0.1);">
+        </figure>
+      </div>
+    </div>
+    <div class="abstract">
+      <p class="has-text-weight-medium">ILCL finds policies that achieve the <strong>lowest violation rate</strong> w.r.t the GT constraints, <strong>expert-level cumulative reward</strong>, and the <strong>lowest TR</strong> (truncated negative robustness).</p>
+    </div>
+
+    <h3 class="is-size-5 has-text-weight-bold mb-3 mt-5">Real-world transfer of the learned constraint (Peg-in-shallow-hole)</h3>
+
+    
+    <!-- <div class="columns is-centered">
+      <div class="teaser">
+        <video autoplay muted loop playsinline controls>
+          <source src="../ilcl/gifs/ilcl_real.mp4" type="video/mp4">
+        </video>
+      </div>
+    </div> -->
+
+    <div class="columns is-centered">
+      <div class="teaser">
+        <iframe 
+          width="100%" 
+          height="720" 
+          src="https://www.youtube.com/embed/8rVsAvO2ymk" 
+          title="YouTube video player" 
+          frameborder="0" 
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+          allowfullscreen
+          style="border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+        </iframe>
+      </div>
+    </div>
+
+    <!-- <h3 class="is-size-5 has-text-weight-bold mb-3 mt-5">Evaluation rollouts (3 different hole angles)</h3>
+      <div class="columns is-centered">
+        <div class="column is-4">
+          <figure class="has-text-centered">
+            <div style="position: relative; display: flex; align-items: center; justify-content: center;">
+              <video autoplay muted loop playsinline controls style="width: 100%; height: auto; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+                <source src="../ilcl/gifs/90-2times-reduced.mp4" type="video/mp4"> https://youtube.com/shorts/3NQ7U5nEPao?feature=share
+              </video>
+            </div>
+            <figcaption class="mt-2">90°</figcaption>
+          </figure>
+        </div>
+        
+        <div class="column is-4">
+          <figure class="has-text-centered">
+            <div style="position: relative; display: flex; align-items: center; justify-content: center; overflow: hidden; aspect-ratio: 5/6;">
+              <video autoplay muted loop playsinline controls style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+                <source src="../ilcl/gifs/eval_60_2x_reduce.mp4" type="video/mp4"> https://youtube.com/shorts/0c7mr1qH3Ac?feature=share
+              </video>
+            </div>
+            <figcaption class="mt-2">60°</figcaption>
+          </figure>
+        </div>
+        
+        <div class="column is-4">
+          <figure class="has-text-centered">
+            <div style="position: relative; display: flex; align-items: center; justify-content: center; overflow: hidden; aspect-ratio: 5/6;">
+              <video autoplay muted loop playsinline controls style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+                <source src="../ilcl/gifs/eval_25_2x_reduced.mp4" type="video/mp4"> https://youtube.com/shorts/3stPWhGGZP4?feature=share
+              </video>
+            </div>
+            <figcaption class="mt-2">-25°</figcaption>
+          </figure>
+        </div>
+      </div>
+    -->
+  <h3 class="is-size-5 has-text-weight-bold mb-3 mt-5">Evaluation rollouts (3 different hole angles)</h3>
+<div class="columns is-centered">
+  <!-- 첫 번째 비디오 (기준) -->
+  <div class="column is-4">
+    <figure class="has-text-centered">
+      <div style="position: relative; display: flex; align-items: center; justify-content: center;">
+        <iframe 
+          width="100%" 
+          height="480" 
+          src="https://www.youtube.com/embed/3NQ7U5nEPao" 
+          title="YouTube video player" 
+          frameborder="0" 
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+          allowfullscreen
+          style="border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+        </iframe>
+      </div>
+      <figcaption class="mt-2">90°</figcaption>
+    </figure>
+  </div>
+  
+  <!-- 두 번째 비디오 -->
+  <div class="column is-4">
+    <figure class="has-text-centered">
+      <div style="position: relative; display: flex; align-items: center; justify-content: center;">
+        <iframe 
+          width="100%" 
+          height="480" 
+          src="https://www.youtube.com/embed/0c7mr1qH3Ac" 
+          title="YouTube video player" 
+          frameborder="0" 
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+          allowfullscreen
+          style="border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+        </iframe>
+      </div>
+      <figcaption class="mt-2">60°</figcaption>
+    </figure>
+  </div>
+  
+  <!-- 세 번째 비디오 -->
+  <div class="column is-4">
+    <figure class="has-text-centered">
+      <div style="position: relative; display: flex; align-items: center; justify-content: center;">
+        <iframe 
+          width="100%" 
+          height="480" 
+          src="https://www.youtube.com/embed/3stPWhGGZP4" 
+          title="YouTube video player" 
+          frameborder="0" 
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+          allowfullscreen
+          style="border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+        </iframe>
+      </div>
+      <figcaption class="mt-2">-25°</figcaption>
+    </figure>
+  </div>
+</div>
+  </div>
+</section>
+
+<script>
+  // Optional JavaScript can be added here
+  document.addEventListener('DOMContentLoaded', function() {
+    // Any initialization code
+  });
+</script>
+</body>
+</html>
